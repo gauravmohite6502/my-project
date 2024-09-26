@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+    <head>
+        <title>Get in Touch</title>
+    
+    <style>
+        form{
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;   
+            }
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            }
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            }    
+    </style>
+    </head>
+<body>
+    <h2>Get in Touch</h2>
+  <body id="contactForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit">Send Message</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('contactForm');
+
+        form.addEventListener('submit', (event) => {
+        event.preventDefault(); 
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        const formData = {
+        name: name,
+        email: email,
+        message: message
+        };
+
+        fetch('/your-api-endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+        })
+        .then(response => {
+            console.log('Form submitted successfully:', response);
+        })
+        .catch(error => {
+            console.error('Error submitting form:', error);
+        });
+        });
+
+    </script>
+</body>
+</html>
+
+
